@@ -1,0 +1,155 @@
+:root {
+    /*Using rgba so that it has a transparency and we can see the image*/
+    --left-bg-color: rgba(87, 84, 235, 0.7);
+    --right-bg-color: rgba(43, 43, 43, 0.8);
+    --left-button-hover-color: rgba(87, 84, 235, 1);
+    --right-button-hover-color: rgba(28, 122, 28, 1);
+    --hover-width:75%;
+    --other-width:25%;
+    --speed: 1000ms;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Ubutu', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.mainContainer {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: #333;
+}
+
+.split {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.split.left {
+    left: 0;
+    background: url(../images/playstation.jpg);
+    background-repeat: no-repeat;
+    background-size: overlay;
+}
+
+/* Working with the left overlay */
+.split.left::before {
+
+    /* When we use ::before ::after property we have to use the content property  */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    /*Custom property*/
+    background-color: var(--left-bg-color);
+}
+
+.split.right {
+    right: 0;
+    background: url(../images/xbox.jpg);
+    background-repeat: no-repeat;
+    background-position: overlay;
+}
+
+
+.split.right::before {
+
+    /* When we use ::before ::after property we have to use the content property  */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    /*Custom property*/
+    background-color: var(--right-bg-color);
+}
+
+h1 {
+    font-size: 4rem;
+    color: #fff;
+
+    /*We want to position each one to the middle on the either sides*/
+    position: absolute;
+    left: 50%;
+    top: 20%;
+
+    /*This puts the begining of h1 tag in the middle, and we want the center of h1 to be in the center of the side*/
+    transform: translateX(-50%);
+
+    /*The h1 elements won't wrap even when the area is small*/
+    white-space: nowrap;
+}
+
+.button {
+
+    /*We want to position it absolute within its container and in center*/
+    position: absolute;
+    left: 50%;
+    top: 40%;
+
+    /*This puts the begining of h1 tag in the middle, and we want the center of h1 to be in the center of the side*/
+    transform: translateX(-50%);
+    text-decoration: none;
+    color: #fff;
+    border: #fff solid .2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 15rem;
+    padding: 1.5rem;
+
+    /*To display the text in the center*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split.left .button:hover{
+    background-color: var(--left-button-hover-color);
+    border-color: var(--left-button-hover-color);
+}
+.split.right .button:hover{
+    background-color: var(--right-button-hover-color);
+    border-color: var(--right-button-hover-color);
+}
+
+/*Styling the hover state of the sides*/
+.hoverLeft .left{
+    width: var(--hover-width);
+}
+.hoverLeft .right{
+    width: var(--other-width);
+}
+.hoverRight .right{
+    width: var(--hover-width);
+}
+.hoverRight .left{
+    width: var(--other-width);
+}
+
+/* To remove the flicking of the sides  */
+.split.left, .split.right, .split.left::before, .split.right::before{
+    transition: all var(--speed) ease-in-out;
+}
+
+@media(max-width:800px){
+    h1{
+        font-size: 2rem;
+        top: 30%;
+    }
+    button{
+        padding: 1.2rem;
+        width: 12rem;
+    }
+}
