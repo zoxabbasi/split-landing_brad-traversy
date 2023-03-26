@@ -9,7 +9,7 @@ const selectElement = (selector) => {
     throw new Error(`Something went wrong, make sure that ${selector} exists or is typed correctly.`);     // The error Will be displayed in the console
 };
 
-const left = document.querySelector('.left');
+const left = selectElement(".left");
 const right = document.querySelector('.right');
 const container = document.querySelector('.mainContainer');
 
