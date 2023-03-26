@@ -10,7 +10,7 @@ const selectElement = (selector) => {
 };
 
 const left = selectElement(".left");
-const right = document.querySelector('.right');
+const right = selectElement(".right");
 const container = document.querySelector('.mainContainer');
 
 left.addEventListener('mouseenter', () => container.classList.add('hoverLeft'));
